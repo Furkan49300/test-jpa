@@ -12,6 +12,9 @@
     <class>fr.tpjpa.b32324c2.entites.Compte</class>
     <class>fr.tpjpa.b32324c2.entites.Operation</class>
     <class>fr.tpjpa.b32324c2.entites.Adresse</class>
+    <class>fr.tpjpa.b32324c2.entites.LivretA</class>
+    <class>fr.tpjpa.b32324c2.entites.AssuranceVie</class>
+    <class>fr.tpjpa.b32324c2.entites.Virement</class>
     <properties>
       <!-- desactiver l'autodetection des classes de type @Entity -->
       <property name="hibernate.archive.autodetection" value="" />

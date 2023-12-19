@@ -7,10 +7,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="operation")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Operation {
 
     @Id
     @Column(name="id")
+    @GeneratedValue
     private int id;
     @Column(name="date")
     private LocalDateTime date;
@@ -59,4 +61,12 @@ public class Operation {
     @ManyToOne
     @JoinColumn(name="CPT_ID")
     private Compte compte;
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
+    }
 }

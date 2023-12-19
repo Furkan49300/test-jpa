@@ -2,6 +2,7 @@ package fr.tpjpa.b32324c2.entites;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,6 +10,7 @@ import java.util.Set;
 public class Client {
     @Id
     @Column(name="id")
+    @GeneratedValue
     private int id;
     @Column(name="nom")
     private String nom;
@@ -16,12 +18,35 @@ public class Client {
     private String prenom;
     @Column(name="dateNaissance")
     private LocalDate dateNaissance;
-
     @Embedded
     private Adresse adresse;
 
-    public Client() {
+    public Adresse getAdresse() {
+        return adresse;
     }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    @ManyToMany(mappedBy="clients")
+    private Set<Compte> comptes = new HashSet<>();
+
+    // Getter et Setter pour la liste comptes
+
+    public Set<Compte> getComptes() {
+        return comptes;
+    }
+
+    public void setComptes(Set<Compte> comptes) {
+        this.comptes = comptes;
+    }
+
+    // Ajoutez ce constructeur pour initialiser la liste comptes
+    public Client() {
+        this.comptes = new HashSet<>();
+    }
+
 
     public String getNom() {
         return nom;
@@ -47,6 +72,7 @@ public class Client {
         this.dateNaissance = dateNaissance;
     }
 
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Client{");
@@ -57,12 +83,8 @@ public class Client {
         return sb.toString();
     }
 
-    @ManyToMany
-    @JoinTable(name="CLI_CPT",
-            joinColumns= @JoinColumn(name="ID_CLI", referencedColumnName="ID"),
-            inverseJoinColumns= @JoinColumn(name="ID_CPT", referencedColumnName="ID")
-    )
-    private Set<Compte> comptes;
+
+
 
     @ManyToOne
     @JoinColumn(name="BANK_ID")

@@ -9,6 +9,7 @@ import java.util.Set;
 public class Banque {
     @Id
     @Column(name="id")
+    @GeneratedValue
     private int id;
     @Column(name="nom")
     private String nom;
